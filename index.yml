@@ -1,0 +1,23 @@
+title: 30 Day Sustainability Challenge
+technologies:
+- R
+repo: https://github.com/quantargo/qbit-example-r-30daysustainabilitychallenge
+image: cover.png
+ogImage: cover.png
+description: Workspace example showing a twitter bot for the 30 day sustainability chart challenge.
+usagePlan: public
+createdAt: '2021-09-22'
+createdBy: Quantargo
+secrets:
+- TWITTER_ACCESS_SECRET
+- TWITTER_ACCESS_TOKEN
+- TWITTER_API_KEY
+- TWITTER_API_SECRET
+schedules:
+- file: main.R
+  schedule: 0 10 * * *
+  enabled: true
+  publish: false
+  endDate: 2009-01-01 12:00:00
+  startDate: 2009-01-01 12:00:00
+  timeZone: Europe/Vienna
