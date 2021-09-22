@@ -9,14 +9,14 @@ usagePlan: public
 createdAt: '2021-09-22'
 createdBy: Quantargo
 secrets:
-- TWITTER_ACCESS_SECRET
-- TWITTER_ACCESS_TOKEN
 - TWITTER_API_KEY
 - TWITTER_API_SECRET
+- TWITTER_ACCESS_SECRET
+- TWITTER_ACCESS_TOKEN
 schedules:
 - file: main.R
   schedule: 0 10 * * *
-  enabled: true
+  enabled: false
   publish: false
   endDate: 2009-01-01 12:00:00
   startDate: 2009-01-01 12:00:00

@@ -90,6 +90,10 @@ jobs:
           STAGE: prod
           REPONAME: ${{ github.event.repository.name }}
           QKEY: ${{ secrets.QKEY_PROD }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
         if: endsWith(github.ref, '/master')
         run: |
           library(qbit)
@@ -97,7 +101,13 @@ jobs:
             main_file = c("main.R"),
             index = yaml::read_yaml("index.yml"),
             meta = list(type="qbit"),
-            apikey = Sys.getenv("QKEY"))
+            apikey = Sys.getenv("QKEY"), 
+            secrets = list(
+              TWITTER_API_KEY =  Sys.getenv("TWITTER_API_KEY"),
+              TWITTER_API_SECRET =  Sys.getenv("TWITTER_API_SECRET"),
+              TWITTER_ACCESS_TOKEN =  Sys.getenv("TWITTER_ACCESS_TOKEN"),
+              TWITTER_ACCESS_SECRET =  Sys.getenv("TWITTER_ACCESS_SECRET")
+            ))
         shell: Rscript {0}
         
       - name: Build and Deploy QBit (Dev)
@@ -107,6 +117,10 @@ jobs:
           REPONAME: ${{ github.event.repository.name }}
           QKEY: ${{ secrets.QKEY_DEV }}
           QBITURL: https://api.quantargo.com/v2-dev
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
         if: endsWith(github.ref, '/next')
         run: |
           library(qbit)
@@ -116,9 +130,9 @@ jobs:
             meta = list(type="qbit"),
             apikey = Sys.getenv("QKEY"), 
             secrets = list(
-              TWITTER_BLA =  Sys.getenv("TWITTER_BLA"),
-              TWITTER_BLA =  Sys.getenv("TWITTER_BLA"),
-              TWITTER_BLA =  Sys.getenv("TWITTER_BLA"),
-              TWITTER_BLA =  Sys.getenv("TWITTER_BLA")
+              TWITTER_API_KEY =  Sys.getenv("TWITTER_API_KEY"),
+              TWITTER_API_SECRET =  Sys.getenv("TWITTER_API_SECRET"),
+              TWITTER_ACCESS_TOKEN =  Sys.getenv("TWITTER_ACCESS_TOKEN"),
+              TWITTER_ACCESS_SECRET =  Sys.getenv("TWITTER_ACCESS_SECRET")
             ))
         shell: Rscript {0}
