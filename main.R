@@ -1,9 +1,6 @@
 library(meme)
 library(rtweet)
-library(showtext)
 library(magick)
-
-font_add_google("Anton", "anton")
 
 image_pool <- c(
             "https://unsplash.com/photos/ficbiwfOPSo/download?force=true&w=1920",
@@ -13,7 +10,6 @@ image_pool <- c(
             "https://unsplash.com/photos/nyL-rzwP-Mk/download?force=true&w=1920",
             "https://unsplash.com/photos/V4ZYJZJ3W4M/download?force=true&w=1920",
             "https://unsplash.com/photos/pMa9_85NqMQ/download?force=true&w=1920")
-
 
 # Create Meme
 meme_source_fname <- "meme_source.jpg"
@@ -36,14 +32,15 @@ text <- if(countdown > 30) {
   sprintf("Challenge ended on %s.", format(enddate, "%b %d, %Y"))
 }
 
+font_import()
 image_meme <- meme(meme_source_fname, 
-                   upper = "#30DaySustainabilityDataChallenge", 
+                   upper = "", 
                    lower = text,
-                   size = 4, 
                    color = "white", 
-                   r = 0.4)
+                   r = 2, 
+                   size = 15)
+meme_save(image_meme, file="meme.jpg")
 
-meme_save(image_meme, file=sprintf("meme-%2d.jpg", i))
 
 # Send Meme via Twitter
 token <- create_token(
@@ -57,5 +54,6 @@ token <- create_token(
 workspace_link <- "https://www.quantargo.com/qbits/qbit-example-30daysustainabilitychallenge"
 tweet_status <- sprintf("#30DaySustainabilityDataChallenge countdown. %s %s. #rstats @datasciconf", text, workspace_link)
 
-post_tweet(status = "#30DaySustainabilityDataChallenge countdown. Save the world through data.", token = token)
-
+post_tweet(status = "#30DaySustainabilityDataChallenge countdown. Save the world through data.", 
+           media = "meme.jpg",
+           token = token)
