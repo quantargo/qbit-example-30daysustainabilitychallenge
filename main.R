@@ -12,10 +12,9 @@ image_pool <- c(
   "https://unsplash.com/photos/pMa9_85NqMQ/download?force=true&w=1920")
 
 
-# Create meme background from random unspash photos
+# Create meme background from random unsplash photos
 meme_source_fname <- "meme_source.jpg"
-image_source <- #sample(image_pool, 1) %>% 
-  image_pool[7] %>%
+image_source <- sample(image_pool, 1) %>% 
   image_read() %>%
   image_scale(geometry = geometry_size_pixels(width = 1200, height = 675, preserve_aspect = TRUE)) %>%
   image_crop(geometry = geometry_area(width = 1200, height = 675, x_off = 0, y_off = 0), gravity = NULL) %>%
@@ -39,7 +38,8 @@ image_meme <- meme(meme_source_fname,
                    lower = text,
                    size = 6, 
                    color = "white", 
-                   r = 0.4)
+                   r = 0.4,
+                   vjust = 0.1)
 
 meme_save(image_meme, file="meme.jpg")
 
