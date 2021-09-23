@@ -101,7 +101,8 @@ jobs:
             main_file = c("main.R"),
             index = yaml::read_yaml("index.yml"),
             meta = list(type="qbit"),
-            apikey = Sys.getenv("QKEY"), 
+            apikey = Sys.getenv("QKEY"),
+            source_main_file = FALSE, 
             secrets = list(
               TWITTER_API_KEY =  Sys.getenv("TWITTER_API_KEY"),
               TWITTER_API_SECRET =  Sys.getenv("TWITTER_API_SECRET"),
@@ -128,7 +129,8 @@ jobs:
             main_file = c("main.R"),
             index = yaml::read_yaml("index.yml"),
             meta = list(type="qbit"),
-            apikey = Sys.getenv("QKEY"), 
+            apikey = Sys.getenv("QKEY"),
+            source_main_file = FALSE, 
             secrets = list(
               TWITTER_API_KEY =  Sys.getenv("TWITTER_API_KEY"),
               TWITTER_API_SECRET =  Sys.getenv("TWITTER_API_SECRET"),

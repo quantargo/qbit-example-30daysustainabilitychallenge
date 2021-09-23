@@ -1,18 +1,49 @@
 library(meme)
 library(rtweet)
 library(showtext)
+library(magick)
 
 font_add_google("Anton", "anton")
 
-# Create Meme
-image_source <- "http://i0.kym-cdn.com/entries/icons/mobile/000/000/745/success.jpg"
-image_meme <- meme(image_source, 
-                   upper = "Happy friday!", 
-                   lower = "Wait, sorry, it's tuesday", 
-                   font = "Anton",
-                   size = 3)
+image_pool <- c(
+            "https://unsplash.com/photos/ficbiwfOPSo/download?force=true&w=1920",
+            "https://unsplash.com/photos/ZKWgoRUYuMk/download?force=true&w=1920",
+            "https://unsplash.com/photos/ICNI2HX2Wvo/download?force=true&w=1920",
+            "https://unsplash.com/photos/w_a40DuyPAc/download?force=true&w=1920",
+            "https://unsplash.com/photos/nyL-rzwP-Mk/download?force=true&w=1920",
+            "https://unsplash.com/photos/V4ZYJZJ3W4M/download?force=true&w=1920",
+            "https://unsplash.com/photos/pMa9_85NqMQ/download?force=true&w=1920")
 
-meme_save(image_meme, file="meme.png")
+
+# Create Meme
+meme_source_fname <- "meme_source.jpg"
+image_source <- sample(image_pool, 1) %>% 
+  image_read() %>%
+  image_scale(geometry = geometry_size_pixels(width = 1200, height = 675, preserve_aspect = TRUE)) %>%
+  image_crop(geometry = geometry_area(width = 1200, height = 675, x_off = 0, y_off = 0), gravity = NULL) %>%
+  image_write(meme_source_fname)
+
+enddate <- as.Date("2021-10-27")
+
+countdown <- enddate - Sys.Date()
+text <- if(countdown > 30) {
+  sprintf("Starting in %d days.", as.Date("2021-09-27") - Sys.Date())
+} else if (countdown == 30) {
+  "Starting Today!"
+} else if (countdown < 30 && countdown > 0) {
+  sprintf("%s Days left!")
+} else {
+  sprintf("Challenge ended on %s.", format(enddate, "%b %d, %Y"))
+}
+
+image_meme <- meme(meme_source_fname, 
+                   upper = "#30DaySustainabilityDataChallenge", 
+                   lower = text,
+                   size = 4, 
+                   color = "white", 
+                   r = 0.4)
+
+meme_save(image_meme, file=sprintf("meme-%2d.jpg", i))
 
 # Send Meme via Twitter
 token <- create_token(
@@ -23,5 +54,8 @@ token <- create_token(
   access_secret = Sys.getenv("TWITTER_ACCESS_SECRET")
 )
 
-post_tweet(status = "Happy Friday! https://next.quantargo.com/qbits/qbit-meme-test-2-Dvk7V45BV/app/main.R", token = token)
+workspace_link <- "https://www.quantargo.com/qbits/qbit-example-30daysustainabilitychallenge"
+tweet_status <- sprintf("#30DaySustainabilityDataChallenge countdown. %s %s. #rstats @datasciconf", text, workspace_link)
+
+post_tweet(status = "#30DaySustainabilityDataChallenge countdown. Save the world through data.", token = token)
 
