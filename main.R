@@ -3,17 +3,19 @@ library(rtweet)
 library(magick)
 
 image_pool <- c(
-            "https://unsplash.com/photos/ficbiwfOPSo/download?force=true&w=1920",
-            "https://unsplash.com/photos/ZKWgoRUYuMk/download?force=true&w=1920",
-            "https://unsplash.com/photos/ICNI2HX2Wvo/download?force=true&w=1920",
-            "https://unsplash.com/photos/w_a40DuyPAc/download?force=true&w=1920",
-            "https://unsplash.com/photos/nyL-rzwP-Mk/download?force=true&w=1920",
-            "https://unsplash.com/photos/V4ZYJZJ3W4M/download?force=true&w=1920",
-            "https://unsplash.com/photos/pMa9_85NqMQ/download?force=true&w=1920")
+  "https://unsplash.com/photos/ficbiwfOPSo/download?force=true&w=1920",
+  "https://unsplash.com/photos/ZKWgoRUYuMk/download?force=true&w=1920",
+  "https://unsplash.com/photos/ICNI2HX2Wvo/download?force=true&w=1920",
+  "https://unsplash.com/photos/w_a40DuyPAc/download?force=true&w=1920",
+  "https://unsplash.com/photos/nyL-rzwP-Mk/download?force=true&w=1920",
+  "https://unsplash.com/photos/V4ZYJZJ3W4M/download?force=true&w=1920",
+  "https://unsplash.com/photos/pMa9_85NqMQ/download?force=true&w=1920")
 
-# Create Meme
+
+# Create meme background from random unspash photos
 meme_source_fname <- "meme_source.jpg"
-image_source <- sample(image_pool, 1) %>% 
+image_source <- #sample(image_pool, 1) %>% 
+  image_pool[7] %>%
   image_read() %>%
   image_scale(geometry = geometry_size_pixels(width = 1200, height = 675, preserve_aspect = TRUE)) %>%
   image_crop(geometry = geometry_area(width = 1200, height = 675, x_off = 0, y_off = 0), gravity = NULL) %>%
@@ -32,15 +34,14 @@ text <- if(countdown > 30) {
   sprintf("Challenge ended on %s.", format(enddate, "%b %d, %Y"))
 }
 
-font_import()
 image_meme <- meme(meme_source_fname, 
-                   upper = "", 
+                   upper = "#30DaySustainability\nDataChallenge", 
                    lower = text,
+                   size = 6, 
                    color = "white", 
-                   r = 2, 
-                   size = 15)
-meme_save(image_meme, file="meme.jpg")
+                   r = 0.4)
 
+meme_save(image_meme, file="meme.jpg")
 
 # Send Meme via Twitter
 token <- create_token(
