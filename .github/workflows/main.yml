@@ -126,8 +126,8 @@ jobs:
         run: |
           library(qbit)
           idx <- yaml::read_yaml("index.yml")
-          idx$schedule[[1]]$enabled <- FALSE
-          idx$schedule[[2]]$enabled <- FALSE
+          #idx$schedules[[1]]$enabled <- FALSE
+          #idx$schedules[[2]]$enabled <- FALSE
           deploy(Sys.getenv("REPONAME"),
             main_file = c("main.R"),
             index = idx,
