@@ -15,14 +15,14 @@ secrets:
 - TWITTER_ACCESS_TOKEN
 schedules:
 - file: main.R
-  schedule: 45 11 * * *
+  schedule: 0 8 * * *
   enabled: true
   publish: false
   startDate: 2021-09-23 10:00:00
   endDate: 2021-10-27 10:00:00
   timeZone: Europe/Vienna
 - file: main.R
-  schedule: 0 21 * * *
+  schedule: 10 16 * * *
   enabled: true
   publish: false
   startDate: 2021-09-23 10:00:00
