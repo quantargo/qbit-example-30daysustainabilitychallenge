@@ -55,6 +55,6 @@ token <- create_token(
 workspace_link <- "https://www.quantargo.com/qbits/qbit-example-30daysustainabilitychallenge"
 tweet_status <- sprintf("#30DaySustainabilityDataChallenge countdown. %s %s. #rstats @datasciconf", text, workspace_link)
 
-post_tweet(status = "#30DaySustainabilityDataChallenge countdown. Save the world through data.", 
+post_tweet(status = "#30DaySustainabilityDataChallenge countdown. #rstats #sustainability.", 
            media = "meme.jpg",
            token = token)
