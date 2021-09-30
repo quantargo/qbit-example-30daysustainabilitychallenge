@@ -28,7 +28,7 @@ text <- if(countdown > 30) {
 } else if (countdown == 30) {
   "Starting Today!"
 } else if (countdown < 30 && countdown > 0) {
-  sprintf("%s Days left!")
+  sprintf("%d Days left!", countdown)
 } else {
   sprintf("Challenge ended on %s.", format(enddate, "%b %d, %Y"))
 }
@@ -55,6 +55,6 @@ token <- create_token(
 workspace_link <- "https://www.quantargo.com/qbits/qbit-example-30daysustainabilitychallenge"
 tweet_status <- sprintf("#30DaySustainabilityDataChallenge countdown. %s %s. #rstats @datasciconf", text, workspace_link)
 
-post_tweet(status = "#30DaySustainabilityDataChallenge countdown. #rstats #sustainability.", 
+post_tweet(status = tweet_status, 
            media = "meme.jpg",
            token = token)
