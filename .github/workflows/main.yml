@@ -31,10 +31,6 @@ jobs:
           DEBIAN_FRONTEND=noninteractive sudo apt-get install -yq python3-pip
           sudo pip3 install pyyaml boto3 python-frontmatter awscli lxml pytz python-dateutil
 
-      - name: Update renv repos
-        run: |
-          python3 script_update_renv_repos.py
-
       - uses: actions/cache@v2
         with:
           path: ~/.local/share/renv
