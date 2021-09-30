@@ -24,13 +24,7 @@ jobs:
       
       - name: Install SO Files
         run: |
-          export R_HOME=$(Rscript -e "cat(Sys.getenv('R_HOME'))")
-          echo $R_HOME
-          aws s3 sync s3://quantargo-repo-public/r/bin/linux/ubuntu-20.04/contrib/4.0.5/SOFiles/ sofiles
-          sudo mv sofiles/* $R_HOME/lib
-          rm -rf sofiles
           sudo apt-get install libopenblas-dev libcurl4-openssl-dev
-  
   
       - name: Install Python deployment packages
         run: |
